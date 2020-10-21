@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 
 const VariantSchema = new mongoose.Schema({
-  category_id: {
-    type: String,
-    required: true
-  },
+  //categories names
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category'}],
   title: {
     type: String,
     required: true
@@ -13,7 +11,7 @@ const VariantSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  covermedia: {
+  covermedia: { 
     type: String,
     required: true
   },
@@ -21,9 +19,7 @@ const VariantSchema = new mongoose.Schema({
   writer: String,
   artist: String,
   illustrated: String,
-  collection_links: [],
-  characters: [],
-  artist: String,
+  characters: [String],
   year: {
     type: String,
     required: true
