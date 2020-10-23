@@ -252,8 +252,9 @@ router.post("/addvariant", upload.single('covermedia'), async function (req, res
     }
 });
 
-router.post("/addcategory", async function (req, res) {
+router.post("/addcategory", upload.single('covermedia'), async function (req, res) {
   try {
+    req.body.covermedia = req.file.path;
     const save = await Category.create(req.body);
     return res.json({
       success: true,

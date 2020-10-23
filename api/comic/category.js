@@ -5,6 +5,10 @@ const CategorySchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
+  },
+  covermedia: { 
+    type: String,
+    required: true
   }
 });
 
