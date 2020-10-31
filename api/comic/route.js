@@ -103,7 +103,6 @@ router.get("/getbooks/:cat_id", async function (req, res) {
 router.get("/getbook/:id", async function (req, res) {
     try {
       const result = await Book.find({"_id": req.params.id});
-      console.log(result.length);
       if (result.length > 0) {
         return res.json({
           success: true,
@@ -218,7 +217,6 @@ router.get("/getcat/:name", async function (req, res) {
 router.get("/getcats", async function (req, res) {
   try {
     const result = await Category.find();
-    console.log(result.length);
     if (result.length > 0) {
       return res.json({
         success: true,
@@ -245,7 +243,8 @@ router.get("/getcats", async function (req, res) {
 //use file upload middleware multer
 router.post("/addbook", upload.single('covermedia'), async function (req, res) {
     try {
-      req.body.covermedia = req.file.path;
+      //req.body.covermedia = req.file.path;
+      req.body.covermedia = '/public/media/' + req.file.filename;
       const save = await Book.create(req.body);
       return res.json({
         success: true,
@@ -261,7 +260,8 @@ router.post("/addbook", upload.single('covermedia'), async function (req, res) {
 
 router.post("/addvariant", upload.single('covermedia'), async function (req, res) {
     try {
-      req.body.covermedia = req.file.path;
+      //req.body.covermedia = req.file.path;
+      req.body.covermedia = '/public/media/' + req.file.filename;
       const save = await Variant.create(req.body);
       return res.json({
         success: true,
@@ -277,7 +277,7 @@ router.post("/addvariant", upload.single('covermedia'), async function (req, res
 
 router.post("/addcategory", upload.single('covermedia'), async function (req, res) {
   try {
-    req.body.covermedia = req.file.path;
+    req.body.covermedia = '/public/media/' + req.file.filename;
     const save = await Category.create(req.body);
     return res.json({
       success: true,
