@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const BookSchema = new mongoose.Schema({
   //categories names
-  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category'}],
+  publisher: { type: mongoose.Schema.Types.ObjectId, ref: 'Publisher'},
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   description: {
     type: String,
@@ -15,7 +16,6 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  publisher: String,
   writer: String,
   artist: String,
   illustrated: String,
@@ -24,8 +24,7 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // id's from varient books
-  variants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Variant'}],
+  series: { type: mongoose.Schema.Types.ObjectId, ref: 'Series'},
 });
 
 module.exports = mongoose.model("Book", BookSchema);
