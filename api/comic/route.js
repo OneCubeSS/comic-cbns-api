@@ -124,8 +124,8 @@ router.get("/getbook/:id", async function (req, res) {
 router.get("/getBooksBySeries/:id", async function (req, res) {
   try {
     const id = req.params.id; 
-    const result = await Book.find().
-      populate({ path: 'series', _id: { $eq: id }, select: 'title' }).
+    const result = await Book.find({ 'series': {$eq: id}}).
+      populate({ path: 'series', select: 'title' }).
       exec();
       
     if (result.length > 0) {

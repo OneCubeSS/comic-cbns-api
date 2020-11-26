@@ -79,9 +79,10 @@ router.get("/getallseries", async function (req, res) {
 router.get("/getSeriesByPublisher/:id", async function (req, res) {
   try {
     const id = req.params.id;   
-    const result = await Volume.find().
-      populate({ path: 'publisher', _id: { $eq: id }, select: 'title' }).
-      exec();
+    const result = await Volume.find({ 'publisher': {$eq: id}}).
+      populate({ 
+        path: 'publisher', 
+        select: '_id, title' }).exec();
       
     if (result.length > 0) {
       return res.json({

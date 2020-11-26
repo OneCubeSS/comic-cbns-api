@@ -5,8 +5,7 @@ const BookSchema = new mongoose.Schema({
   publisher: { type: mongoose.Schema.Types.ObjectId, ref: 'Publisher'},
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   description: {
     type: String,
